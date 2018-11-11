@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--  CSS -->
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <!--  JS Frameworks -->
+    <script type=text/javascript src=http://code.jquery.com/jquery-latest.min.js> </script> <!-- JS -->
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="jumbotron">Salary Calculator</h1>
+        <h2>Add Employee</h2>
+        <div id="formDiv">
+
+            <input class="form-control" id="firstNameIn" type="text" placeholder="First Name">
+            <input class="form-control" id="lastNameIn" type="text" placeholder="Last Name">
+            <input class="form-control" id="iDIn" type="text" placeholder="ID">
+            <input class="form-control" id="titleIn" type="text" placeholder="Title">
+            <input class="form-control" id="salaryIn" type="number" placeholder="Annual Salary">
+            <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+            <button type="submit" class="btn btn-secondary" id="populateButton">Randomize</button>
+
+        </div>
+
+        <div id="employeeDiv">
+            <table class="table table-striped table-dark">
+                <thead id="mainHead">
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col"></th>
+                </thead>
+                <tbody id="tableBody"></tbody>
+
+                <thead id="monthlySalaryHead">
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">
+                        <h3>$</h3>
+                        <h3 id="salaryTh">0</h3>
+                    </th>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+</body>
+
+</html>
