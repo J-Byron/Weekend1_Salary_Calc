@@ -39,10 +39,13 @@ class Employee {
             <td>
                 <button type="button" id= "${this._identifier}Button" class="btn btn-danger"></button>
             </td>
-        </tr>
-    `);
-        
+        </tr>`);
     } // Ends Constructor
+
+    addToDom(){
+        // Add employee to 
+        $(`#tableBody`).append(this._$row);
+    } // Ends addToDom
 } // Ends Employee
 
 $(document).ready(function() {
@@ -78,7 +81,9 @@ $(document).ready(function() {
             $inputFields.titleIn.val(),
             $inputFields.salaryIn.val()
             );
-            
+
+            // adds employee to Dom
+            employee.addToDom();
         }
 
         // clears input fields of each input
