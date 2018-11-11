@@ -17,3 +17,30 @@ Create a delete button that removes an employee from the DOM.
 For Base mode, it does not need to remove that Employee's salary 
 from the reported total.
 */
+
+class Employee {
+    constructor(firstName,lastname,identifier,title,annualSalary){
+
+        // Employee properties
+        this._firstName = firstName;
+        this._lastName = lastname;
+        this._identifier = identifier;
+        this._title = title;
+        this._annualSalary = annualSalary;
+
+        // Employee as row in table
+        this._$row = $(
+       `<tr id= "${this._identifier}">
+            <td>${this._firstName}</td>
+            <td>${this._lastName}</td>
+            <td>${this._identifier}</td>
+            <td>${this._title}</td>
+            <td>$ ${this._annualSalary}</td>
+            <td>
+                <button type="button" id= "${this._identifier}Button" class="btn btn-danger"></button>
+            </td>
+        </tr>
+    `);
+        
+    }
+}
