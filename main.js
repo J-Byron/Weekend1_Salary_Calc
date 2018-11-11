@@ -43,8 +43,19 @@ class Employee {
     } // Ends Constructor
 
     addToDom(){
-        // Add employee to 
+        // Adds employee to 
         $(`#tableBody`).append(this._$row);
+
+        // Sets variable to 
+        const $deleteButton = $(`#${this._identifier}Button`);
+
+        // create an in instance reference to be used inside event handler
+        const self = this;
+
+        // remove button 
+        $deleteButton.on(`click`,function(){
+            $(self._$row).remove();
+        });
     } // Ends addToDom
 } // Ends Employee
 
