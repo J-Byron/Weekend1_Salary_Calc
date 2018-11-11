@@ -42,5 +42,50 @@ class Employee {
         </tr>
     `);
         
-    }
+    } // Ends Constructor
+} // Ends Employee
+
+$(document).ready(function() {
+
+    // Assigns input to variables (to be called later as $inputFields.lastNameIn.val() for example)
+    const $inputFields = {
+        firstNameIn : $(`#firstNameIn`),
+        lastNameIn:  $(`#lastNameIn`),
+        iDIn:        $(`#iDIn`),
+        titleIn :     $(`#titleIn`),
+        salaryIn :    $(`#salaryIn`)
+        };
+    
+    // Assigns button queries
+    const $submitButton = $(`#submitButton`);
+
+    // Handles Submit click
+    $submitButton.on(`click`,function() {
+
+        // verifies no field empty 
+        if(($inputFields.firstNameIn.val() == '')||
+        ($inputFields.lastNameIn.val() == '')||
+        ($inputFields.iDIn.val() == '')||
+        ($inputFields.titleIn.val() == '')||
+        ($inputFields.salaryIn.val() === '')){
+            alert(`missing field!`);
+        }else{
+
+            // Creates employee instance with fields
+            let employee = new Employee($inputFields.firstNameIn.val(),
+            $inputFields.lastNameIn.val(),
+            $inputFields.iDIn.val(),
+            $inputFields.titleIn.val(),
+            $inputFields.salaryIn.val()
+            );
+            
+        }
+
+        // clears input fields of each input
+        for(let inputField in $inputFields){
+           $inputFields[inputField].val('');
+        }
+    } 
+    )// Ends $submitButton
 }
+) // Ends Docuument ready
