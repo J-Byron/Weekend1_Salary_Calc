@@ -26,12 +26,12 @@ class Employee {
         // Adds employee to 
         $(`#tableBody`).append(this._$row);
 
-        // Sets variable to 
-        const $deleteButton = $(`#${this._identifier}Button`);
-
         //updates Salary ++
         let currentMonthlyTotal = parseFloat($(`#salaryTh`).text());
         $(`#salaryTh`).text(`${(currentMonthlyTotal + (this._annualSalary/12)).toFixed(2)}`);
+
+        // Connects button query
+        const $deleteButton = $(`#${this._identifier}Button`);
 
         // create an in instance reference to be used inside event handler
         const self = this;
@@ -49,7 +49,7 @@ class Employee {
             if (currentMonthlyTotal < 20000) {
                 $(`#monthlySalaryHead`).css(`background-color`, `forestgreen`);
             }
-        });
+        }); // Ends deleteButton on click
     } // Ends addToDom
 } // Ends Employee
 
@@ -66,6 +66,7 @@ $(document).ready(function () {
 
     // Assigns button queries
     const $submitButton = $(`#submitButton`);
+    const $populateButton = $(`#populateButton`);
 
     // Handles Submit click
     $submitButton.on(`click`, function () {
@@ -105,5 +106,53 @@ $(document).ready(function () {
         }
     }
     )// Ends $submitButton
+
+    // For faster testing
+    $populateButton.on(`click`,function() {
+        // random people to populate fields
+        const people = [
+            {
+            firstNameIn : "Bobby",
+            lastNameIn:   "Tarintino",
+            iDIn:         `${Math.floor(Math.random() * 100)}`,
+            titleIn :     "Trapper",
+            salaryIn :    (Math.random() * 100000).toFixed(2)
+            },
+
+            {
+            firstNameIn : "Rick",
+            lastNameIn:   "Sanchez",
+            iDIn:         `${Math.floor(Math.random() * 100)}`,
+            titleIn :     "Scientist",
+            salaryIn :    0.00
+            },
+
+            {
+            firstNameIn : "Phillip J.",
+            lastNameIn:   "Fry",
+            iDIn:         `${Math.floor(Math.random() * 100)}`,
+            titleIn :     "Delivery Boy",
+            salaryIn :    26549.00
+            },
+
+            {
+            firstNameIn : "Jon",
+            lastNameIn:   "Snow",
+            iDIn:         `${Math.floor(Math.random() * 100)}`,
+            titleIn :     "King In the North",
+            salaryIn :    (Math.random() * 100000).toFixed(2)
+            }
+        ];
+        
+        // return random person from people
+        let employeeModel = people[Math.floor(Math.random() * people.length)];
+
+        // Populate fields
+        $inputFields.firstNameIn.val(employeeModel.firstNameIn),
+        $inputFields.lastNameIn.val(employeeModel.lastNameIn),
+        $inputFields.iDIn.val(employeeModel.iDIn),
+        $inputFields.titleIn.val(employeeModel.titleIn),
+        $inputFields.salaryIn.val(employeeModel.salaryIn)
+    });
 }
 ) // Ends Docuument ready
