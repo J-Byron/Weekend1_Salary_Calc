@@ -114,7 +114,7 @@ $(document).ready(function () {
             {
             firstNameIn : "Bobby",
             lastNameIn:   "Tarintino",
-            iDIn:         `${Math.floor(Math.random() * 100)}`,
+            iDIn:         `${Math.floor(Math.random() * 1000)}`,
             titleIn :     "Trapper",
             salaryIn :    (Math.random() * 100000).toFixed(2)
             },
@@ -122,7 +122,7 @@ $(document).ready(function () {
             {
             firstNameIn : "Rick",
             lastNameIn:   "Sanchez",
-            iDIn:         `${Math.floor(Math.random() * 100)}`,
+            iDIn:         `${Math.floor(Math.random() * 1000)}`,
             titleIn :     "Scientist",
             salaryIn :    0.00
             },
@@ -130,7 +130,7 @@ $(document).ready(function () {
             {
             firstNameIn : "Phillip J.",
             lastNameIn:   "Fry",
-            iDIn:         `${Math.floor(Math.random() * 100)}`,
+            iDIn:         `${Math.floor(Math.random() * 1000)}`,
             titleIn :     "Delivery Boy",
             salaryIn :    26549.00
             },
@@ -138,7 +138,7 @@ $(document).ready(function () {
             {
             firstNameIn : "Jon",
             lastNameIn:   "Snow",
-            iDIn:         `${Math.floor(Math.random() * 100)}`,
+            iDIn:         `${Math.floor(Math.random() * 1000)}`,
             titleIn :     "King In the North",
             salaryIn :    (Math.random() * 100000).toFixed(2)
             }
