@@ -1,25 +1,5 @@
-/*
-The application should have an input form that collects employee 
-    first name
-    last name
-    ID number
-    job title
-    annual salary.
-
-A 'Submit' button should collect the form information, 
-store the information to calculate monthly costs, 
-append information to the DOM and clear the input fields.
- Using the stored information, calculate monthly costs and 
- append this to the to DOM. If the total monthly cost exceeds 
- $20,000, add a red background color to the total monthly cost.
-
-Create a delete button that removes an employee from the DOM. 
-For Base mode, it does not need to remove that Employee's salary 
-from the reported total.
-*/
-
 class Employee {
-    constructor(firstName,lastname,identifier,title,annualSalary){
+    constructor(firstName, lastname, identifier, title, annualSalary) {
 
         // Employee properties
         this._firstName = firstName;
@@ -30,7 +10,7 @@ class Employee {
 
         // Employee as row in table
         this._$row = $(
-       `<tr id= "${this._identifier}">
+            `<tr id= "${this._identifier}">
             <td>${this._firstName}</td>
             <td>${this._lastName}</td>
             <td>${this._identifier}</td>
@@ -42,66 +22,88 @@ class Employee {
         </tr>`);
     } // Ends Constructor
 
-    addToDom(){
+    addToDom() {
         // Adds employee to 
         $(`#tableBody`).append(this._$row);
 
         // Sets variable to 
         const $deleteButton = $(`#${this._identifier}Button`);
 
+        //updates Salary ++
+        let currentMonthlyTotal = parseFloat($(`#salaryTh`).text());
+        $(`#salaryTh`).text(`${(currentMonthlyTotal + (this._annualSalary/12)).toFixed(2)}`);
+
         // create an in instance reference to be used inside event handler
         const self = this;
 
         // remove button 
-        $deleteButton.on(`click`,function(){
+        $deleteButton.on(`click`, function () {
             $(self._$row).remove();
+
+            //update salary --
+            currentMonthlyTotal = parseFloat($(`#salaryTh`).text()); // grab current monthly
+            $(`#salaryTh`).text(`${(currentMonthlyTotal - (self._annualSalary / 12)).toFixed(2)}`); // update salary on dom
+            currentMonthlyTotal = parseFloat($(`#salaryTh`).text()); // grab updated salary
+
+            // Change color if < 20000
+            if (currentMonthlyTotal < 20000) {
+                $(`#monthlySalaryHead`).css(`background-color`, `forestgreen`);
+            }
         });
     } // Ends addToDom
 } // Ends Employee
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     // Assigns input to variables (to be called later as $inputFields.lastNameIn.val() for example)
     const $inputFields = {
-        firstNameIn : $(`#firstNameIn`),
-        lastNameIn:  $(`#lastNameIn`),
-        iDIn:        $(`#iDIn`),
-        titleIn :     $(`#titleIn`),
-        salaryIn :    $(`#salaryIn`)
-        };
-    
+        firstNameIn: $(`#firstNameIn`),
+        lastNameIn: $(`#lastNameIn`),
+        iDIn: $(`#iDIn`),
+        titleIn: $(`#titleIn`),
+        salaryIn: $(`#salaryIn`)
+    };
+
     // Assigns button queries
     const $submitButton = $(`#submitButton`);
 
     // Handles Submit click
-    $submitButton.on(`click`,function() {
+    $submitButton.on(`click`, function () {
 
         // verifies no field empty 
-        if(($inputFields.firstNameIn.val() == '')||
-        ($inputFields.lastNameIn.val() == '')||
-        ($inputFields.iDIn.val() == '')||
-        ($inputFields.titleIn.val() == '')||
-        ($inputFields.salaryIn.val() === '')){
+        if (($inputFields.firstNameIn.val() == '') ||
+            ($inputFields.lastNameIn.val() == '') ||
+            ($inputFields.iDIn.val() == '') ||
+            ($inputFields.titleIn.val() == '') ||
+            ($inputFields.salaryIn.val() === '')) {
             alert(`missing field!`);
-        }else{
+        } else {
 
             // Creates employee instance with fields
             let employee = new Employee($inputFields.firstNameIn.val(),
-            $inputFields.lastNameIn.val(),
-            $inputFields.iDIn.val(),
-            $inputFields.titleIn.val(),
-            $inputFields.salaryIn.val()
+                $inputFields.lastNameIn.val(),
+                $inputFields.iDIn.val(),
+                $inputFields.titleIn.val(),
+                $inputFields.salaryIn.val()
             );
 
             // adds employee to Dom
             employee.addToDom();
+
+            // Queries for current Monthly salary and converts to float
+            let currentMonthlyTotal = parseFloat($(`#salaryTh`).text());
+
+            // Changes color if >20000
+            if (currentMonthlyTotal > 20000) {
+                $(`#monthlySalaryHead`).css(`background-color`, `red`);
+            }
         }
 
         // clears input fields of each input
-        for(let inputField in $inputFields){
-           $inputFields[inputField].val('');
+        for (let inputField in $inputFields) {
+            $inputFields[inputField].val('');
         }
-    } 
+    }
     )// Ends $submitButton
 }
 ) // Ends Docuument ready
